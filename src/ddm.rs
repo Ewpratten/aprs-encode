@@ -28,11 +28,11 @@ impl PackArrayString for DegreeMinutes {
         s: &mut arrayvec::ArrayString<SIZE>,
     ) -> Result<(), crate::errors::PackError> {
         // Handle Degrees
-        s.try_push(('0' as u8 + (self.degrees / 10) as u8) as char)?;
+        s.try_push(('0' as u8 + ((self.degrees / 10) % 10) as u8) as char)?;
         s.try_push(('0' as u8 + (self.degrees % 10) as u8) as char)?;
 
         // Handle Minutes
-        s.try_push(('0' as u8 + (self.minutes / 10.0) as u8) as char)?;
+        s.try_push(('0' as u8 + ((self.minutes / 10.0) % 10.0) as u8) as char)?;
         s.try_push(('0' as u8 + (self.minutes % 10.0) as u8) as char)?;
 
         // Push decimal
@@ -123,7 +123,6 @@ impl PackArrayString for DdmLatitude {
         Ok(())
     }
 }
-
 
 /// Longitude in DDM
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]

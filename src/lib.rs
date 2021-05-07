@@ -8,6 +8,8 @@ pub use arrayvec;
 // Modules
 pub mod errors;
 pub mod aprs;
+pub mod ddm;
+pub mod stack_str;
 
 
 // Top-level exports

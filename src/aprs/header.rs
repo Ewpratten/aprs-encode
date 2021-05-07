@@ -1,6 +1,7 @@
-use crate::errors::PackError;
+use crate::{errors::PackError, stack_str::PackArrayString};
 
 /// Represents the header of an APRS packet
+#[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct AprsHeader<'a> {
 
     /// Source callsign
@@ -13,10 +14,10 @@ pub struct AprsHeader<'a> {
     pub path: Option<&'a [&'a str]>,
 }
 
-impl AprsHeader<'_> {
+impl PackArrayString for AprsHeader<'_> {
 
     /// Pack the header into an `ArrayString`
-    pub fn pack_into<const SIZE: usize>(
+    fn pack_into<const SIZE: usize>(
         &self,
         s: &mut arrayvec::ArrayString<SIZE>,
     ) -> Result<(), PackError> {
@@ -35,5 +36,34 @@ impl AprsHeader<'_> {
         }
 
         Ok(())
+    }
+}
+
+
+#[cfg(test)]
+mod tests {
+
+    use arrayvec::ArrayString;
+
+    use super::*;
+
+    #[test]
+    fn test_header_packing() {
+
+        // Build a buffer
+        let mut buffer = ArrayString::<128>::new();
+
+        // Add the packet
+        let header = AprsHeader{
+            src_call: "va3zza",
+            dest_call: "n0call",
+            path: Some(&["WIDE1-1", "APRSIS"])
+        };
+
+        // Pack
+        header.pack_into(&mut buffer).unwrap();
+
+        assert_eq!(*buffer, *"va3zza>n0call,WIDE1-1,APRSIS");
+
     }
 }

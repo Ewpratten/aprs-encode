@@ -1,26 +1,34 @@
-use crate::errors::PackError;
+use crate::{ddm::{DdmLatitude, DdmLongitude}, errors::PackError, stack_str::PackArrayString};
 
-
-
+/// Represents the global position of an APRS packet
+#[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct AprsPosition {
-    longitude_ddm: f32,
-    latitude_ddm: f32
+    longitude: DdmLongitude,
+    latitude: DdmLatitude,
 }
 
 impl AprsPosition {
-
-    pub fn new() -> Self {
+    pub fn new(latitude: DdmLatitude, longitude: DdmLongitude) -> Self {
         Self {
-            
+            longitude,
+            latitude,
         }
     }
 
-    /// Pack the position into an `ArrayString`
-    pub fn pack_into<const SIZE: usize>(
+
+}
+
+impl PackArrayString for AprsPosition {
+    fn pack_into<const SIZE: usize>(
         &self,
         s: &mut arrayvec::ArrayString<SIZE>,
     ) -> Result<(), PackError> {
-
+        
+        // pack data
+        self.latitude.pack_into(s)?;
+        s.try_push('/')?;
+        self.longitude.pack_into(s)?;
+        
         Ok(())
     }
 }

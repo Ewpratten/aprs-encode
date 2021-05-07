@@ -47,6 +47,7 @@ impl PackArrayString for DegreeMinutes {
 }
 
 /// Enum representation of the 4 cardinal Directions
+#[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub enum CardinalDirection {
     North,
     East,
@@ -76,6 +77,7 @@ pub trait DdmAngle {
 }
 
 /// Latitude in DDM
+#[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct DdmLatitude {
     ddm: DegreeMinutes,
     direction: CardinalDirection,
@@ -124,6 +126,7 @@ impl PackArrayString for DdmLatitude {
 
 
 /// Longitude in DDM
+#[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct DdmLongitude {
     ddm: DegreeMinutes,
     direction: CardinalDirection,

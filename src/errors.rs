@@ -2,6 +2,7 @@ use core::fmt::Display;
 
 use arrayvec::CapacityError;
 
+#[derive(Debug)]
 pub struct PackError {}
 
 impl From<CapacityError<char>> for PackError {

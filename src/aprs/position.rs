@@ -32,3 +32,30 @@ impl PackArrayString for AprsPosition {
         Ok(())
     }
 }
+
+#[cfg(test)]
+mod tests {
+
+    use arrayvec::ArrayString;
+
+    use super::*;
+
+    #[test]
+    fn test_position_packing() {
+
+        // Build a buffer
+        let mut buffer = ArrayString::<128>::new();
+
+        // Add the packet
+        let data = AprsPosition {
+            latitude: 42.981312.into(),
+            longitude: (-81.257472).into()
+        };
+
+        // Pack
+        data.pack_into(&mut buffer).unwrap();
+
+        assert_eq!(*buffer, *"4258.87N/08115.44W");
+
+    }
+}

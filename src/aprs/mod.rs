@@ -7,10 +7,10 @@ pub mod position;
 pub mod wx;
 
 pub struct AprsPacket<'a> {
-    header: AprsHeader<'a>,
-    position: Option<AprsPosition>,
-    wx: Option<AprsWx>,
-    message: Option<&'a str>,
+    pub header: AprsHeader<'a>,
+    pub position: Option<AprsPosition>,
+    pub wx: Option<AprsWx>,
+    pub message: Option<&'a str>,
 }
 
 impl AprsPacket<'_> {}

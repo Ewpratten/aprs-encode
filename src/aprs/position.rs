@@ -3,8 +3,8 @@ use crate::{ddm::{DdmLatitude, DdmLongitude}, errors::PackError, stack_str::Pack
 /// Represents the global position of an APRS packet
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct AprsPosition {
-    longitude: DdmLongitude,
-    latitude: DdmLatitude,
+    pub longitude: DdmLongitude,
+    pub latitude: DdmLatitude,
 }
 
 impl AprsPosition {

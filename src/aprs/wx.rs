@@ -3,9 +3,9 @@ use crate::{errors::PackError, stack_str::PackArrayString};
 /// Represents the weather component of an APRS packet
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct AprsWx {
-    wind_direction_degrees: Option<u8>,
-    wind_speed_mph: Option<u8>,
-    temperature_f: Option<i8>,
+    pub wind_direction_degrees: Option<u8>,
+    pub wind_speed_mph: Option<u8>,
+    pub temperature_f: Option<i8>,
 }
 
 impl PackArrayString for AprsWx {

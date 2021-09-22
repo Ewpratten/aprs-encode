@@ -79,8 +79,8 @@ pub trait DdmAngle {
 /// Latitude in DDM
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct DdmLatitude {
-    ddm: DegreeMinutes,
-    direction: CardinalDirection,
+    pub ddm: DegreeMinutes,
+    pub direction: CardinalDirection,
 }
 
 impl From<f32> for DdmLatitude {
@@ -127,8 +127,8 @@ impl PackArrayString for DdmLatitude {
 /// Longitude in DDM
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct DdmLongitude {
-    ddm: DegreeMinutes,
-    direction: CardinalDirection,
+    pub ddm: DegreeMinutes,
+    pub direction: CardinalDirection,
 }
 
 impl From<f32> for DdmLongitude {
